@@ -12,8 +12,9 @@ bot.on("ready", () => {
     console.log(`| Serveurs: ${bot.guilds.cache.size} |`);
     console.log("+--------------+");
     const statuses = [
-        () => `Bot Officiel De VifHyper`,
-        () => `By Navillus`
+        () => `Bot Officiel De Genova`,
+        () => `${bot.guilds.cache.size} serveurs`
+        () => `By Navillus#0107`
     ]
     let i = 0
     setInterval(() => {
