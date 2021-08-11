@@ -13,7 +13,8 @@ bot.on("ready", () => {
     console.log("+--------------+");
     const statuses = [
         () => `Bot Officiel De Genova`,
-        () => `By Navillus`
+        () => `${bot.guilds.cache.size} serveurs`,
+        () => `By Navillus#0107`
     ]
     let i = 0
     setInterval(() => {
