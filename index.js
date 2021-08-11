@@ -13,7 +13,7 @@ bot.on("ready", () => {
     console.log("+--------------+");
     const statuses = [
         () => `Bot Officiel De Genova`
-        () => `By Navillus#0107`
+        () => "By Navillus#0107"
     ]
     let i = 0
     setInterval(() => {
