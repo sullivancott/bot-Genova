@@ -1,5 +1,8 @@
-const { Client, Collection } = require('discord.js');
-const bot = new Client();
+const Discord = require('discord.js'),
+    bot = new Discord.Client({
+        fetchAllMembers: true,
+        partials: ['MESSAGE', 'REACTION']
+    }),
 const { prefix } = require(`./config.json`);
 [`aliases`, `commands`].forEach(x => bot[x] = new Collection());
 ["command", "events"].forEach(x => require(`./handlers/${x}`)(bot));
@@ -12,7 +15,7 @@ bot.on("ready", () => {
     console.log(`| Serveurs: ${bot.guilds.cache.size} |`);
     console.log("+--------------+");
     const statuses = [
-        () => `Bot Officiel De VifHyper`,
+        () => `Bot Officiel De Genova`,
         () => `By Navillus`
     ]
     let i = 0
@@ -42,9 +45,27 @@ bot.on("message", message => {
                  } }
                  else{
                  message.channel.send(`vous devez indiquer un nombre de messages a supprimer !`)
-                 } 
-        
-        }    
+                }
+            }
+        }
     }
-}
 )
+
+bot.on('messageReactionAdd', (reaction, user) => {
+    if (!reaction.message.guild || user.bot) return
+    const reactionRoleElem = config.reactionRole[reaction.message.id]
+    if (!reactionRoleElem) return
+    const prop = reaction.emoji.id ? 'id' : 'name'
+    const emoji = reactionRoleElem.emojis.find(emoji => emoji[prop] === reaction.emoji[prop])
+    if (emoji) reaction.message.guild.member(user).roles.add(emoji.roles)
+    else reaction.users.remove(user)
+})
+ 
+bot.on('messageReactionRemove', (reaction, user) => {
+    if (!reaction.message.guild || user.bot) return
+    const reactionRoleElem = config.reactionRole[reaction.message.id]
+    if (!reactionRoleElem || !reactionRoleElem.removable) return
+    const prop = reaction.emoji.id ? 'id' : 'name'
+    const emoji = reactionRoleElem.emojis.find(emoji => emoji[prop] === reaction.emoji[prop])
+    if (emoji) reaction.message.guild.member(user).roles.remove(emoji.roles)
+})
