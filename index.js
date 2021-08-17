@@ -69,3 +69,4 @@ bot.on('messageReactionRemove', (reaction, user) => {
     const emoji = reactionRoleElem.emojis.find(emoji => emoji[prop] === reaction.emoji[prop])
     if (emoji) reaction.message.guild.member(user).roles.remove(emoji.roles)
 })
+
