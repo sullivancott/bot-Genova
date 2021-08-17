@@ -1,5 +1,5 @@
 const { MessageEmbed } = require("discord.js");
-const { greenlight } = require("../JSON/colours.json")
+const { greenlight } = require("./JSON/colours.json")
 
     run: async (bot, message, args) => {
       try {
