@@ -5,7 +5,7 @@ module.exports = {
         if (!message.member.hasPermission('MANAGE_GUILD')) return message.channel.send('Vous n\'avez pas la permission d\'utiliser cette commande.')
         if (!args[0]) return message.channel.send('Veuillez indiquer du texte Ã  envoyer.')
         message.delete()
-        message.channel.send(message.content.trim().slice(`${config.prefix}say`.length))
+        message.channel.send(message.content.trim().slice(`${prefix}say`.length))
     },
     name: 'say',
     guildOnly: true
