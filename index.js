@@ -1,8 +1,5 @@
-const Discord = require('discord.js'),
-    bot = new Discord.Client({
-        fetchAllMembers: true,
-        partials: ['MESSAGE', 'REACTION']
-    }),
+const { Client, Collection } = require('discord.js');
+const bot = new Client();
 const { prefix } = require(`./config.json`);
 [`aliases`, `commands`].forEach(x => bot[x] = new Collection());
 ["command", "events"].forEach(x => require(`./handlers/${x}`)(bot));
@@ -16,7 +13,8 @@ bot.on("ready", () => {
     console.log("+--------------+");
     const statuses = [
         () => `Bot Officiel De Genova`,
-        () => `By Navillus`
+        () => `${bot.guilds.cache.size} serveurs`,
+        () => `By Navillus#0107`
     ]
     let i = 0
     setInterval(() => {
@@ -50,23 +48,3 @@ bot.on("message", message => {
         }
     }
 )
-
-bot.on('messageReactionAdd', (reaction, user) => {
-    if (!reaction.message.guild || user.bot) return
-    const reactionRoleElem = config.reactionRole[reaction.message.id]
-    if (!reactionRoleElem) return
-    const prop = reaction.emoji.id ? 'id' : 'name'
-    const emoji = reactionRoleElem.emojis.find(emoji => emoji[prop] === reaction.emoji[prop])
-    if (emoji) reaction.message.guild.member(user).roles.add(emoji.roles)
-    else reaction.users.remove(user)
-})
- 
-bot.on('messageReactionRemove', (reaction, user) => {
-    if (!reaction.message.guild || user.bot) return
-    const reactionRoleElem = config.reactionRole[reaction.message.id]
-    if (!reactionRoleElem || !reactionRoleElem.removable) return
-    const prop = reaction.emoji.id ? 'id' : 'name'
-    const emoji = reactionRoleElem.emojis.find(emoji => emoji[prop] === reaction.emoji[prop])
-    if (emoji) reaction.message.guild.member(user).roles.remove(emoji.roles)
-})
-
