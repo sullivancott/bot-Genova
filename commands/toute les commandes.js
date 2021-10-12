@@ -23,6 +23,7 @@ module.exports = {
 +nitro
 +origin
 +fortnite
++hulu
 +minecraft
 +wakanim
 +steam
