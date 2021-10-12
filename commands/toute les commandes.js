@@ -11,7 +11,7 @@ module.exports = {
         let embed = new MessageEmbed()
             .setTitle(`Voila toute les **Commandes**`)// Le titre du message
             .setColor('#F20a0a')// La couleur du message
-            .setFooter(`By Navillus#3258`)// Ton footer
+            .setFooter(`By !Navillus#7171`)// Ton footer
             .setTimestamp()
             .addField(`Voici toute les commandes :` , `+disney
 +adn
